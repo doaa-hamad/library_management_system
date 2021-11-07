@@ -1,0 +1,356 @@
+Daily movement  ---- (add operation-export excel, csv)
+Books           ---- (add, edit, remove, all books, search, export, import)
+Cliets          ---- (add, edit, export, import)
+Reports :
+	* client    		--- (one client, top 10) from - to - export
+	* book      		--- (one client, top 10) export
+	* monthly(default)  --- (export) from - to
+History(admin)  ---- actions [daily movement], filter(time, book, client)
+Dashboard		---- today actions
+Seetings        ---- (user, permissions, gmail, branch)
+
+Users [admin, employee]  
+# the employee can't do any permission without get approval from admin ( Notice: admin know all permission from history to agree )
+
+Permissions = # It Actions Before Performed 
+Employee periority # Choose Higher periority
+
+=========================================================================
+operation:
+	* datatime
+	* branch
+	* user
+====================== Tables In Databases ======================
+- Book :
+	* Title
+	* description
+	* category
+	* code # Contain Part From All Description The Book
+	* parts +
+	* part_order
+	* Price
+	* publisher
+	* author
+	* image +
+	* status
+	* date
+=========================================================================
+- Clients :
+	* name
+	* email
+	* phone
+	* date
+	* national_id
+=========================================================================
+- Employee :
+	* name
+	* email
+	* phone
+	* date
+	* national_id
+	* periority    
+	* permissions  # Have Table Own
+=========================================================================
+- Category :
+	* category_name
+	* parent_category
+=========================================================================
+- Branch :
+	* name
+	* code # To distinguish between branches in different countries
+	* location
+=========================================================================
+- Daily_movements :
+	* book
+	* chient
+	* type [rent, retrieve]
+	* date
+	* branch
+	* from to
+	* employee
+=========================================================================
+- History :
+	* employee
+	* action
+	* table
+	* date
+	* branch
+=========================================================================
+- Publisher
+	* name
+	* location
+=========================================================================
+- Author
+	* name
+	* location
+---------------- Addition Operation ^_* --------
+
+* Sort in Retrieve
+* Sound # When Open Window ^_^
+* Changed Field
+* Calender
+
+--- problem -_- ---
+
+* category order
+* Daily Movement - Real Date
+------------ Errorssss In Cource -_- -----------
+* In Course ==>  Not Use pushButton_30(Special cearch About Employee)
+
+#============ That Bigggggggggggg Error ===============
+** In Pemissions You Allow To Specific Th Permissions Special Books, Clients, Settings Without Sure If This Employee IF Allow To Use Permissions Book_tab,Clients_tab, Seetings_Tab First 
+
+** Make Employee Button as Ccombobox in Add_User_Permissions Tab So He Not Use Chech Button -_-
+
+# ------------------------------ Errorssss In Cource -_- -------------------
+
+** Whe Not Found Books ==> Not Give me Error mesage ,,, SO Mmake Message To Write It IN Books & Daily Movements When Be Table Empty
+
+** To_Date in Daily Movements
+** Check the email if available or Not When Add Employee
+** Delete Book If Was Exist In Daily Movements
+** Mmessage If employee or client or book Not Exist When Search
+** Edit Idea For Edit Employee ,, If password == passord2 ==> Not Good & Not Logic 
+** Question: Why put self.db.commit() out if in video (Edit Employee Method)
+
+** In employee_permissions table ,, If The Employee Was Exist ,, & I want To Make This Eemployee As Admin==> That Mmust Update Information This Employee To Admin ,, Not Add Again To DB =====> The Most Sitable To This Problem ==> Add All Employees To This Table And If I want To Anyone As Admin ==> Make Update For His Information Not Add Again IN DB *_^
+
+** In Book_Export_Reports() Method: In Excel File Appear Number of Category, Author Instead Name .. So Make It Appear Name In Insted Number 
+
+** Edit Price .. To Be 50.0 unstead 50.000
+** When Choose Tab ==> Become Have Specific Different Color
+
+** Add Exist Button ===> after That Return Login Tab Or Exist From Program Complected (Close Program)
+
+** Appear Wrong Error Massege If User Not Exist When Login To System
+** Make Add User_Permissions_Tab To Be Speacial  For Just Admin .. Not All Admins ,,Just Basic Admin 
+** Make Checkbox Empty When Applay In Add_User_Permissions Tab
+** If Change Permission For Specific Employee ==> Send Message To Employee To Tell You What New Permissions
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    # ********************** Add_New_Book Action To Login ********************
+        action = 3
+        table = 1
+        date = datetime.datetime.now()
+        self.cur.execute('''
+                        INSERT INTO history(employee_id, action, table, date)
+                        VALUES (%s, %s, %s, %s)''', (employee_id, action, table, date))
+
+        self.db.commit()
+
+        # *********************************************************************
+
+        # ********************** Edit_Book_Search Action To Login ********************
+        action = 6
+        table = 1
+        date = datetime.datetime.now()
+        self.cur.execute('''
+                                INSERT INTO history(employee_id, action, table, date)
+                                VALUES (%s, %s, %s, %s)''', (employee_id, action, table, date))
+
+        self.db.commit()
+
+        # *********************************************************************
+
+        # ********************** Edit_Book Action To Login ********************
+        action = 4
+        table = 1
+        date = datetime.datetime.now()
+        self.cur.execute('''
+                         INSERT INTO history(employee_id, action, table, date)
+                         VALUES (%s, %s, %s, %s)''', (employee_id, action, table, date))
+
+        self.db.commit()
+        # *********************************************************************
+
+                    # ********************** Delete_Book Action To Login ********************
+            action = 5
+            table = 1
+            date = datetime.datetime.now()
+            self.cur.execute('''
+                             INSERT INTO history(employee_id, action, table, date)
+                             VALUES (%s, %s, %s, %s)''', (employee_id, action, table, date))
+
+            self.db.commit()
+
+            # *********************************************************************
+
+                    # ********************** Add_New_Client Action To Login ********************
+        action = 3
+        table = 2
+        date = datetime.datetime.now()
+        self.cur.execute('''
+                        INSERT INTO history(employee_id, action, table, date)
+                        VALUES (%s, %s, %s, %s)''', (employee_id, action, table, date))
+
+        self.db.commit()
+        # *********************************************************************
+
+                # ********************** Edit_Client_Search Action To Login ********************
+        action = 6
+        table = 2
+        date = datetime.datetime.now()
+        self.cur.execute('''
+                                INSERT INTO history(employee_id, action, table, date)
+                                VALUES (%s, %s, %s, %s)''', (employee_id, action, table, date))
+
+        self.db.commit()
+        # *********************************************************************
+
+                # ********************** Edit_Client Action To Login ********************
+        action = 4
+        table = 2
+        date = datetime.datetime.now()
+        self.cur.execute('''
+                         INSERT INTO history(employee_id, action, table, date)
+                         VALUES (%s, %s, %s, %s)''', (employee_id, action, table, date))
+
+        self.db.commit()
+        # *********************************************************************
+
+                    # ********************** Delete_Client Action To Login ********************
+            action = 5
+            table = 2
+            date = datetime.datetime.now()
+            self.cur.execute('''
+                                             INSERT INTO history(employee_id, action, table, date)
+                                             VALUES (%s, %s, %s, %s)''', (employee_id, action, table, date))
+
+            self.db.commit()
+            # *********************************************************************
+
+
+                # ********************** Client_Export_Reports Action To Login ********************
+        action = "Export Clients"
+        date = datetime.datetime.now()
+        self.cur.execute('''
+                                         INSERT INTO history(employee_id, action, date)
+                                         VALUES (%s, %s, %s)''', (employee_id, action, date))
+
+        self.db.commit()
+        # *********************************************************************
+
+
+                # ********************** Add_Branch Action To Login ********************
+        action = 3
+        table = 4
+        date = datetime.datetime.now()
+        self.cur.execute('''
+                         INSERT INTO history(employee_id, action, table, date)
+                         VALUES (%s, %s, %s, %s)''', (employee_id, action, table, date))
+
+        self.db.commit()
+        # *********************************************************************
+
+
+                # ********************** Add_Publisher Action To Login ********************
+        action = 3
+        table = 8
+        date = datetime.datetime.now()
+        self.cur.execute('''
+                         INSERT INTO history(employee_id, action, table, date)
+                         VALUES (%s, %s, %s, %s)''', (employee_id, action, table, date))
+
+        self.db.commit()
+        # *********************************************************************
+
+
+                # ********************** Add_Author Action To Login ********************
+        action = 3
+        table = 6
+        date = datetime.datetime.now()
+        self.cur.execute('''
+                         INSERT INTO history(employee_id, action, table, date)
+                         VALUES (%s, %s, %s, %s)''', (employee_id, action, table, date))
+
+        self.db.commit()
+        # *********************************************************************
+
+
+                # ********************** Add_Category Action To Login ********************
+        action = 3
+        table = 5
+        date = datetime.datetime.now()
+        self.cur.execute('''
+                                 INSERT INTO history(employee_id, action, table, date)
+                                 VALUES (%s, %s, %s, %s)''', (employee_id, action, table, date))
+
+        self.db.commit()
+        # *********************************************************************
+
+
+                # ********************** Add_Employee Action To Login ********************
+        action = 3
+        table = 7
+        date = datetime.datetime.now()
+        self.cur.execute('''
+                         INSERT INTO history(employee_id, action, table, date)
+                         VALUES (%s, %s, %s, %s)''', (employee_id, action, table, date))
+
+        self.db.commit()
+        # *********************************************************************
+
+
+                    # ********************** Edit_Employee_Data Action To Login ********************
+            action = "Edit Employee"
+            date = datetime.datetime.now()
+            self.cur.execute('''
+                                 INSERT INTO history(employee_id, action, date)
+                                 VALUES (%s, %s, %s)''', (employee_id, action, date))
+
+            self.db.commit()
+            # *********************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+

@@ -1,0 +1,79 @@
+
+
+
+
+
+
+
+
+
+
+
+import mysql.connector
+
+MY_DATA = {"user": "root",
+           'password': '',
+           'host': 'localhost',
+           'port': 3306}
+
+
+# db = mysql.connector.connect(user='root', password='',
+#                               host='127.0.0.1',
+#                               database='library')
+
+db = mysql.connector.connect(**MY_DATA)
+
+
+
+
+
+
+
+
+
+
+
+                
+
+
+
+                if col == 2:
+                    sql = '''SELECT category_name FROM category WHERE id=%s'''
+                    self.cur.execute(sql, [(item)])
+                    category_name = self.cur.fetchone()
+                    self.tableWidget_2.setItem(row, col, QTableWidgetItem(category_name[0]))
+
+                elif col == 3:
+                    sql = '''SELECT Name FROM author WHERE id=%s'''
+                    self.cur.execute(sql, [(item)])
+                    author_name = self.cur.fetchone()
+                    self.tableWidget_2.setItem(row, col, QTableWidgetItem(author_name[0]))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ book_title = self.lineEdit_11.text()
+        book_description = self.textEdit_2.toPlainText()
+        book_code = self.lineEdit_12.text()
+        book_category = self.comboBox_10.currentText()
+        book_author = self.comboBox_9.currentText()
+        book_publisher = self.comboBox_7.currentText()
+        book_price = self.lineEdit_10.text()
+
+        search_book_title = self.lineEdit_11.text()
+
+        self.cur.execute('''
+                    UPDATE books SET title=%s ,description=%s ,code=%s ,category_id=%s ,author_id=%s ,publisher_id=%s ,price=%s           
+                ''', (book_title, book_description, book_code, book_category, book_author, book_publisher, book_price))
+
+        self.db.commit()
